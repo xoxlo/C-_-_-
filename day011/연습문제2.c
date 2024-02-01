@@ -1,46 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
-	int n = 1;
-	int* arr = (int*)calloc(25,sizeof(int));
-
-	print(arr, 5);
-
-	for (int i = 0; i < n * n; i++)
-		arr[i] = 0;
-	int index = 0;
-
-
-	void print(int* arr, n) {
-		printf("### ÃÊ±â 1Â÷¿ø µ¿Àû ¹è¿­ ###\n");
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				printf("%d ", arr[index]);
-				index++;
-			}
-			puts("");
+void print(int* arr, n) {
+    int index = 0;
+	printf("### ì´ˆê¸° 1ì°¨ì› ë™ì  ë°°ì—´ ###\n");
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < 5; j++) {
+			printf("%d ", arr[index]);
+			index++;
 		}
-		while (n != 0) {
-			scanf_s("%d", &n);
-			arr = realloc(arr, n, n * n * sizeof(int));
-			printf("»õ·Î¿î Å©±â (Á¾·á : 0) : ");
-			scanf_s("%d", &n);
-			if (n == 0)	break;
-			else {
-				arr = (int*)realloc(arr, n);
-				printf("### ÀçÇÒ´çµÈ 1Â÷¿ø µ¿Àû ¹è¿­ ###\n");
-				for (int i = 0; i < n; i++) {
-					for (int j = 0; j < n; j++) {
-						printf("%d ", arr[i]);
-					}
-					puts("");
-				}
-			}
-		}
-		free(arr);
+		puts("");
 	}
-
-
+	while (n != 0) {
+		printf("ìƒˆë¡œìš´ í¬ê¸° (ì¢…ë£Œ : 0) : ");
+		scanf("%d", &n);
+        arr = realloc(arr, n * n * sizeof(int));
+		if (n == 0)	break;
+		else {
+			arr = (int*)realloc(arr, n);
+			printf("### ìž¬í• ë‹¹ëœ 1ì°¨ì› ë™ì  ë°°ì—´ ###\n");
+            index = 0;
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; j++) {
+					printf("%d ", arr[index]);
+				}
+				puts("");
+			}
+		}
+	}
+	free(arr);
+}
+int main() {
+	int* arr = (int*)calloc(25,sizeof(int));
+	print(arr, 5);
 	return 0;
 }
