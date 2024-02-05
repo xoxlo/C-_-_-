@@ -14,9 +14,9 @@ void printlist(int*);// 리스트를 출력하는 함수
 void insert(int*, int, int); // 중간에 추가하는 함수
 
 // 리스트에서 데이터를 삭제하는 함수
-void removelast(int*);
-void removefirst(int*);
-void removemid(int*, int*);
+int removelast(int*);
+int removefirst(int*);
+void removemid(int*, int);
 
 int main() {
 	int arraylist[100];
@@ -30,6 +30,8 @@ int main() {
 	insert(arraylist, 15, 14);
 	removelast(arraylist);
 	removefirst(arraylist);
+	removemid(arraylist, 14);
+	removemid(arraylist, 15);
 }
 void prepend(int* arr, int value) {
 	for (int i = size-1; i >= 0; i--)	// 값을 뒤로 한칸 씩 땡기는 for문
@@ -68,15 +70,39 @@ void insert(int* arr, int target, int value) {
 	size++;
 	printlist(arr);
 }
-void removelast(int* arr) {
+int removelast(int* arr) {
 	arr[size - 1] = 0;
 	size--;
 	printlist(arr);
+	return arr;
 }
-void removefirst(int* arr) {
+int removefirst(int* arr) {
 	arr[0] = 0;
 	for (int i = 0; i < size-1; i++)
 		arr[i] = arr[i+1];
+	size--;
+	printlist(arr);
+	return arr;
+}
+
+void removemid(int* arr, int target) {
+
+	if (size == 0) return;	// 빈리스트일 때 예외처리
+
+	int position = -1;
+	for (int i = 0; i < size; i++) {
+		if (arr[i] == target) {
+			position = i;
+			break;
+		}
+	}
+
+	if (position == -1) return; 	// target이 리스트에 없는 경우
+
+	// 리스트를 앞으로 이동
+	for (int i = position; i < size - 1; i++)
+		arr[i] = arr[i + 1];
+	arr[size - 1] = 0;
 	size--;
 	printlist(arr);
 }

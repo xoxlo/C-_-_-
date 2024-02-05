@@ -15,3 +15,4 @@ void prepend(char[][100], const char*);
 void insert(char[][100], const char*, const char*);
 char* removelast(char[][100]);
 char* removefirst(char[][100]);
+void removemid(char[][100], const char*);

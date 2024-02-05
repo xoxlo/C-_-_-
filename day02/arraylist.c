@@ -1,5 +1,7 @@
+// arraylist.c
+
 #include "arraylist.h"
-int count = 0;
+int count = 0;	// 행의 크기
 
 void printlist(char arr[][100]) {
 	for (int i = 0; i < count; i++)
@@ -20,21 +22,21 @@ void prepend(char arr[][100], const char* value) {
 	printlist(arr);
 }
 void insert(char arr[][100], const char* target, const char* value) {
-	int position = -1;
+	int row = -1;
 	for (int i = 0; i < count; i++) {
 		if (strcmp(arr[i], target) == 0) {
-			position = i;
+			row = i;
 			break;
 		}
 	}
 	// target이 리스트에 없는 경우
-	if (position == -1)
+	if (row == -1)
 		return;
 
 	// 리스트를 뒤로 shift하는 경우
-	for (int i = count - 1; i >= position; i--)
+	for (int i = count - 1; i >= row; i--)
 		strcpy_s(arr[i + 1], 100, arr[i]);
-	strcpy_s(arr[position], 100, value);
+	strcpy_s(arr[row], 100, value);
 	count++;
 	printlist(arr);
 }
@@ -53,4 +55,25 @@ char* removefirst(char arr[][100]) {
 		strcpy_s(arr[i], 100, arr[i+1]);
 	count--;
 	return removeitem;
+}
+
+void removemid(char arr[][100], const char* target) {
+
+	if (count == 0) return; // 빈리스트일 때 예외처리
+
+	int row = -1;
+	for (int i = 0; i < count; i++) {
+		if (strcmp(arr[i], target) == 0) {
+			row = i;
+			break;
+		}
+	}
+	if (row == -1) return;	// target이 리스트에 없는 경우
+
+	for(int i = row; i < count - 1; i++)	// 한칸씩 앞으로 땡기는 작업
+		strcpy_s(arr[i], 100, arr[i+1]);
+
+	strcpy_s(arr[count - 1], 100, "");
+	count--;
+	printlist(arr);
 }

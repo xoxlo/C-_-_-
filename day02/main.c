@@ -12,10 +12,17 @@ int main() {
 	prepend(arrlist,"lemon");
 	insert(arrlist, "apple", "pineapple");
 	insert(arrlist, "grape", "blueberry");
+	
 	removelast(arrlist);
 	removefirst(arrlist);
-	printlist(arrlist);
 
-	// lemon grape pineapple apple banana blueberry orange
+	printlist(arrlist);
+	// blueberry grape pineapple apple banana
+
+	removemid(arrlist, "pineapple");
+	// blueberry grape apple banana
+	removemid(arrlist, "blueberry");
+	
+
 	return 0;
 }
