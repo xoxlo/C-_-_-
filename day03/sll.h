@@ -13,4 +13,7 @@ void print(); // 리스트 출력 함수
 void init(const char*);	// 초기화 함수
 void append(const char*); // 리스트의 끝에 추가하는 함수
 void prepend(const char*); // 리스트의 처음에 추가하는 함수
-void removeNode(const char*);
+void insert(const char*, const char*);
+char* removelast();
+char* removefirst();
+void removemid(const char*);

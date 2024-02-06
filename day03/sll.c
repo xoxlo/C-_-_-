@@ -52,14 +52,84 @@ void prepend(const char* value) {
 	print();
 }
 
-void removeNode(const char* value) {
-	Node* cur = head;
-	while (cur->link != NULL) {
-		if (cur->data == value) {
-			(cur+1)->link = cur->link;
-		}
-		else
-			cur = cur->link;
+void insert(const char* target, const char* value) {
+	Node* prenode = head; // 검색을 하기 위한 커서 역할의 포인터
+	if (strcmp(head->data, target) == 0) { // 추가할 값이 HEAD의 값과 같을 때 (예외1)
+		prepend(value);
+		return;
 	}
+	while (1) {
+		if (prenode == NULL) // 검색할 노드가 없을 때 (예외2)
+			return;
+		if (strcmp(prenode->link->data, target) == 0)
+			break;
+		prenode = prenode->link;
+	}
+	Node* newnode = (Node*)malloc(sizeof(Node));
+	strcpy_s(newnode->data, 30, value);	// data필드에 추가할 값을 저장
+	newnode->link = prenode->link;
+	prenode->link = newnode;
+	print();
+}
+
+char* removelast() {
+	if (head == NULL) return NULL;
+	char* removeitem = (char*)malloc(sizeof(30));
+
+	strcpy_s(removeitem, 30, tail->data);
+	
+	if (head != NULL && head == tail) {
+		free(head);
+		head = tail = NULL;
+		print();
+		return removeitem;
+	}
+	Node* pre = head;
+	while (1) {
+		if (pre->link == tail) break;
+		pre = pre->link;
+	}
+	free(tail);
+	pre->link = NULL;
+	tail = pre;
+	print();
+	return removeitem;
+}
+
+char* removefirst() {
+	if (head == NULL) return NULL;
+	char* removeitem = (char*)malloc(sizeof(30));
+	strcpy_s(removeitem, 30, head->data);
+
+	if (head != NULL && head == tail) {
+		free(head);
+		head == tail == NULL;
+	}
+	Node* removenode = head;
+	head = head->link;
+	free(removenode);
+	print();
+	return removeitem;
+}
+
+void removemid(const char* target) {
+	if (strcmp(head->data, target) == 0) {
+		removefirst();
+		return;
+	}
+	Node* pre = head;
+	while (1) {
+		if (pre == NULL) break;
+		if (strcmp(pre->link->data, target))
+			break;
+		pre = pre->link;
+	}
+	if (pre->link == tail) {
+		removelast();
+		return;
+	}
+	Node* removenode = pre->link;
+	pre->link = removenode->link;
+	free(removenode);
 	print();
 }

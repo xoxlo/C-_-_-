@@ -18,5 +18,14 @@
     <ClCompile Include="단순연결리스트.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="sll.h">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="sll.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
